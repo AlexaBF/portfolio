@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<link rel="alternate" hreflang="es" href="../index.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="alternate" hreflang="en" href="index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg:            #F7F9FC;
+    --bg-alt:        #EEF2F7;
+    --bg-card:       #FFFFFF;
+
+    --ink:           #334155;
+    --ink-soft:      #64748B;
+    --ink-strong:    #0F172A;
+
+    --line:          #D9E2EC;
+
+    --accent:        #2563EB;
+    --accent-alt:    #F97316;
+
+    --font-display: 'Space Grotesk', 'Comfortaa', sans-serif;
+    --font-body: 'Inter', 'Nunito', sans-serif;
+
+    --section-pad: clamp(32px, 6vw, 96px);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 500;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{
+    font-family: var(--font-display);
+    color: var(--ink-strong);
+    margin: 0;
+    font-weight: 700;
+  }
+  a{ color: inherit; }
+  img{ max-width: 100%; display:block; }
+
+  section{
+    position: relative;
+    min-height: 100vh;
+    padding: var(--section-pad);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .eyebrow{
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: .08em;
+    color: var(--ink-soft);
+    font-size: .9rem;
+  }
+
+  .page-num{
+    position:absolute;
+    bottom: 28px;
+    right: 32px;
+    width: 46px; height:46px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    font-family: var(--font-display);
+    font-size: .95rem;
+  }
+
+  /* ---------- SELECTOR DE IDIOMA ---------- */
+  .lang-switch{
+    position: fixed;
+    top: 22px;
+    left: 32px;
+    z-index: 60;
+    display:flex;
+    align-items:center;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: .9rem;
+  }
+  .lang-switch a{
+    text-decoration:none;
+    color: var(--ink-soft);
+    padding: 4px 8px;
+    border-radius: 999px;
+    transition: color .2s, background .2s;
+  }
+  .lang-switch a.active{
+    color: var(--bg);
+    background: var(--ink);
+  }
+  .lang-switch a:not(.active):hover{
+    color: var(--ink-strong);
+  }
+  .lang-switch .sep{ color: var(--line); }
+
+  /* ---------- NAV DOTS (lateral) ---------- */
+  .dotnav{
+    position: fixed;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    display:flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 50;
+  }
+  .dotnav a{
+    width: 9px; height:9px;
+    border-radius:50%;
+    background: var(--line);
+    transition: background .25s, transform .25s;
+  }
+  .dotnav a:hover, .dotnav a.active{
+    background: var(--ink);
+    transform: scale(1.25);
+  }
+  @media (max-width: 720px){ .dotnav{ display:none; } }
+
+  /*portada */
+  .cover{
+    background: var(--bg);
+  }
+  
+  .cover .title{
+    font-size: clamp(3.2rem, 12vw, 9rem);
+    line-height: .95;
+    text-align: center;
+    filter: blur(.2px);
+  }
+  .cover .meta{
+    margin-top: 8vh;
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-family: var(--font-body);
+    font-weight: 600;
+  }
+  .cover .meta .role{ 
+    font-size: clamp(1.1rem, 2vw, 1.6rem); 
+    filter: blur(1.2px); }
+  .cover .meta .name{ 
+    font-size: clamp(1.1rem, 2vw, 1.6rem); 
+    filter: blur(1.2px); }
+
+  /* sobre mí*/
+  .about{
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: clamp(24px, 5vw, 80px);
+    align-items: center;
+    background: var(--bg);
+  }
+  .about h1{
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 28px;
+  }
+  .about p{
+    font-size: clamp(1rem, 1.3vw, 1.25rem);
+    color: var(--ink);
+    max-width: 46ch;
+  }
+  .about .photo{
+    aspect-ratio: 4/5;
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+    font-size: .95rem;
+    text-align:center;
+    border: 1px dashed var(--line);
+  }
+  .about .photo img{ width:100%; height:100%; object-fit: cover; }
+  @media (max-width: 800px){
+    .about{ grid-template-columns: 1fr; }
+    .about .photo{ order:-1; max-width: 320px; margin: 0 auto; }
+  }
+
+  /* detalle*/
+  .facts{
+    background: var(--bg-alt);
+    display:block;
+  }
+  .facts-grid{
+    display:grid;
+    grid-template-columns: 1fr 1.3fr .8fr;
+    gap: clamp(28px, 5vw, 72px);
+  }
+  .facts h2{
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    margin-bottom: 20px;
+  }
+  .facts .block + .block{ margin-top: 34px; }
+  .facts .block .when{
+    color: var(--ink-soft);
+    font-weight: 600;
+    margin: 2px 0 10px;
+    font-size: .95rem;
+  }
+  .facts ul{
+    margin: 0; padding-left: 20px;
+  }
+  .facts li{ margin-bottom: 6px; }
+  .facts .role-line{ font-weight: 700; color: var(--ink-strong); }
+  @media (max-width: 900px){
+    .facts-grid{ grid-template-columns: 1fr; }
+  }
+
+  /*proyecto */
+  .projects{
+    background: var(--bg);
+    min-height: auto;
+    padding-top: var(--section-pad);
+    padding-bottom: var(--section-pad);
+  }
+  .projects .section-title{
+    text-align:center;
+    margin-bottom: clamp(24px, 4vw, 44px);
+  }
+  .projects .section-title h1{
+    font-size: clamp(2.2rem, 4vw, 3rem);
+  }
+  .projects .section-title p{
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin: 10px auto 0;
+    font-size: 1rem;
+  }
+
+  .projects-filters{
+    list-style:none;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    gap: clamp(16px, 3vw, 34px);
+    margin: 0 0 clamp(28px, 4vw, 46px);
+    padding: 0 0 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .projects-filters li{
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: .95rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+    padding-bottom: 12px;
+    margin-bottom: -15px;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+    user-select: none;
+  }
+  .projects-filters li:hover{ color: var(--ink-strong); }
+  .projects-filters li.filter-active{
+    color: var(--ink-strong);
+    border-color: var(--ink);
+  }
+
+  .projects-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(18px, 3vw, 30px);
+  }
+  .project-card{
+    background: var(--bg-card);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    transition: transform .25s, box-shadow .25s, opacity .25s;
+    display: block;
+  }
+  .project-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(0,0,0,.08);
+  }
+  .project-card.is-hidden{ display:none; }
+
+  .project-thumb{
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--bg-alt);
+  }
+  .project-thumb img{
+    width:100%; height:100%;
+    object-fit: cover;
+    transition: transform .4s;
+  }
+  .project-card:hover .project-thumb img{ transform: scale(1.06); }
+  .project-thumb .placeholder{
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--ink-soft);
+    font-size: .85rem;
+    text-align:center;
+    padding: 10px;
+  }
+
+  .project-overlay{
+    position:absolute; inset:0;
+    background: rgba(30,30,30,.55);
+    display:flex; align-items:center; justify-content:center;
+    gap: 14px;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .project-card:hover .project-overlay{ opacity: 1; }
+  .project-overlay button{
+    width: 42px; height:42px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    color: var(--ink-strong);
+    display:flex; align-items:center; justify-content:center;
+    cursor: pointer;
+    transition: transform .2s;
+  }
+  .project-overlay button:hover{ transform: scale(1.1); }
+  .project-overlay svg{ width:18px; height:18px; }
+
+  .project-info{
+    padding: 18px 20px 22px;
+    text-align:left;
+  }
+  .project-info h3{
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+  .project-info p{
+    color: var(--ink-soft);
+    font-size: .92rem;
+    margin: 0;
+  }
+
+  @media (max-width: 900px){
+    .projects-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 620px){
+    .projects-grid{ grid-template-columns: 1fr; }
+    .projects-filters{ gap: 14px 22px; }
+  }
+
+  /*proyecto popup */
+  .project-modal{
+    position: fixed;
+    inset: 0;
+    background: rgba(20,20,20,.72);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 24px;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s;
+  }
+  .project-modal.is-open{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .project-modal-inner{
+    background: var(--bg-card);
+    border-radius: 18px;
+    max-width: 720px;
+    width: 100%;
+    max-height: 88vh;
+    overflow: auto;
+    position: relative;
+    transform: translateY(16px);
+    transition: transform .25s;
+  }
+  .project-modal.is-open .project-modal-inner{ transform: translateY(0); }
+  .project-modal-close{
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 38px; height:38px;
+    border-radius: 50%;
+    border: none;
+    background: var(--bg-alt);
+    color: var(--ink-strong);
+    display:flex; align-items:center; justify-content:center;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .project-modal-img{
+    width:100%;
+    aspect-ratio: 16/10;
+    background: var(--bg-alt);
+    overflow:hidden;
+  }
+  .project-modal-img img{ width:100%; height:100%; object-fit: cover; }
+  .project-modal-body{ padding: clamp(20px, 4vw, 34px); }
+  .project-modal-body h3{ font-size: clamp(1.4rem, 3vw, 1.8rem); margin-bottom: 10px; }
+  .project-modal-body .tags{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom: 16px; }
+  .project-modal-body .tags span{
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: .78rem;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 5px 12px;
+  }
+  .project-modal-body p{ color: var(--ink); font-size: 1rem; }
+
+  footer{
+    text-align:center;
+    padding: 22px;
+    font-size: .8rem;
+    color: var(--ink-soft);
+    background: var(--bg-alt);
+  }
+
+  .project-gallery {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .modal-video {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+  }
+</style>
+</head>
+<body>
+
+<!-- selector de idioma -->
+<div class="lang-switch">
+  <a href="../index.html">ES</a>
+  <span class="sep">|</span>
+  <a href="index.html" class="active">EN</a>
+</div>
+
+<!-- navegación lateral por puntos -->
+<nav class="dotnav">
+  <a href="#cover"></a>
+  <a href="#about"></a>
+  <a href="#facts"></a>
+  <a href="#projects"></a>
+  <a href="#footer"></a>
+</nav>
+
+<!-- ---------------------------------PORTADA----------------------  -->
+<section id="cover" class="cover">
+  <h1 class="title">Portfolio</h1>
+  <div class="meta">
+    <div class="role">Software Engineer</div>
+    <div class="name">Alexa</div>
+  </div>
+  <div class="page-num">1</div>
+</section>
+
+<!-- ------------------------ Sobre mí-----------------  -->
+<section id="about" class="about">
+  <div>
+    <h1>About me:</h1>
+    <p>
+      My name is <strong>Alexa</strong> and I'm a software engineer with 4+ years of programming experience in C++, C#, and Python.
+      Skilled in building innovative, cross-disciplinary tech solutions through teamwork and creative problem-solving.
+      I'm a software engineer with experience building web, mobile, game, and data-driven applications. 
+      I enjoy combining software development with interactive technologies, data visualization, and analytics to create practical and engaging solutions.
+    </p>
+  </div>
+  <div class="photo">
+    <img src="../images/about.png" alt="aboutme">
+  </div>
+  <div class="page-num">2</div>
+</section>
+
+<!-- ----------------------detalles---------------------- -->
+<section id="facts" class="facts" >
+  <div class="facts-grid">
+
+    <div>
+      <h2>Education</h2>
+      <div class="block">
+        <div class="role-line">Monterrey Institute of Technology and Higher Education</div>
+        <div class="when">B.S. in Computer Science and Technology | 2019 – 2023</div>
+      </div>
+      <h2>Languages</h2>
+      <p>Spanish (Native)<br>English (Advanced)</p>
+
+      <h2>Certificates</h2>
+      <div class="block">
+        <div class="role-line">Extended Reality for Everybody</div>
+        <div class="when">Coursera: University of Michigan <br>
+          <a href="https://coursera.org/share/3bb6651bfbcdcbe98902ddfb759b0fdf" target="_blank">View Certificate</a>
+        </div>
+      </div>
+      <div class="block">
+        <div class="role-line">CCNA: Introduction to Networks</div>
+        <div class="when">Cisco <br>
+          <a href="https://www.credly.com/badges/a8ce7bda-58e6-40c9-8507-8cc24db704f5?source=linked_in_profile" target="_blank">View Certificate</a>
+        </div>
+      </div>
+      
+      <div class="block">
+        <div class="role-line">Scrum Fundamentals Certified (SFC™)</div>
+        <div class="when">SCRUMstudy <br>
+          <a href="https://www.scrumstudy.com/certification/verify?type=SFC&number=830612" target="_blank">View Certificate</a>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="role-line">Python for Everybody</div>
+        <div class="when">Coursera: University of Michigan <br>
+          <a href="https://coursera.org/share/0f2fb6ad19f40b3c52debf3df9e32b3e" target="_blank">View Certificate</a>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="role-line">Object-Oriented Data Structures in C++</div>
+        <div class="when">Coursera: University of Illinois <br>
+          <a href="https://coursera.org/share/b9809bce3958f8f4c13933384b069971" target="_blank">View Certificate</a>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div>
+      <h2>Experience</h2>
+      <div class="block">
+        <div class="role-line">Software Engineer</div>
+        <div class="when">Freelance | June 2024–Present</div>
+        <ul>
+          <li>Application Development: Custom application development based on client requirements.</li>
+          <li>Software Testing: Application testing, debugging, and quality assurance.</li>
+          <li>Database Development: Database design, development, and maintenance.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <div class="role-line">IT jr.</div>
+        <div class="when">Cyberpeace | April 2023–July 2023</div>
+        <ul>
+          <li>Document all equipment, specify VLAN assignments, assign IP addresses, examine network infrastructure,
+and implement systematic documentation.</li>
+          <li>Tools: Network analysis tools and technical documentation platforms.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <div class="role-line">Software Developer</div>
+        <div class="when">Forza Global | August 2022–December 2022</div>
+        <ul>
+          <li>Design and implementation of a monitoring system.</li>
+          <li>Documentation of the improvement proposal.</li>
+          <li>Tools: Mendix and Arduino.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <div class="role-line">Backend Developer</div>
+        <div class="when">BAMX | February 2022–June 2022</div>
+        <ul>
+          <li>Digitize and speed up the process of recollection of the food bank in Morelos through a web page.</li>
+          <li>Create API endpoints, test the API with Jest, and verify the web page is 
+            performing correctly utilizing a web driver.</li>
+          <li>Tools: JavaScript, Selenium, Jest, git, Github, and Figma.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <div class="role-line">Mobile Developer</div>
+        <div class="when">BAMX | August 2021–October 2021</div>
+        <ul>
+          <li>Implement a mobile app for android users to digitize and facilitate the 
+            recollection of donated products to the food bank in Morelos.</li>
+          <li>Designed UI templates and developed core app functionality.</li>
+          <li>Tools: Kotlin, Android Studio, Figma, git, and Github.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <div class="role-line">Game Developer</div>
+        <div class="when">MINSAIT | February 2021–June 2021</div>
+        <ul>
+          <li>Develop a video game that evaluates the soft skills of an eligible candidate for a job in MINSAIT.</li>
+          <li>Game design, developing gameplay features, and score design for the three soft 
+            skills (working under pressure, problem-solving, and ethics, trust & values).</li>
+          <li>Tools: C# and Unity.</li>
+        </ul>
+      </div>
+       
+      
+    </div>
+
+    <div>
+      <h2 style="margin-top:34px;">Skills</h2>
+      <ul>
+        <li>C++</li>
+        <li>Python</li>
+        <li>C#</li>
+        <li>MySQL</li>
+        <li>Unity</li>
+      </ul>
+      
+      <h2 style="margin-top:34px;">Interests</h2>
+      <ul>
+        <li>Sports Analytics</li>
+        <li>Extended Reality (XR)</li>
+        <li>Game Development</li>
+        <li>Interactive Technologies</li>
+        <li>Data Visualization</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="page-num">3</div>
+</section>
+
+<!-- ---------------------------------proyectos--------------------------------- -->
+<section id="projects" class="projects">
+  <div class="section-title">
+    <h1>Projects</h1>
+    <p>A selection of things I've built, filtered by category.</p>
+  </div>
+
+  <ul class="projects-filters" id="projectFilters">
+    <li data-filter="all" class="filter-active">All Projects</li>
+    <li data-filter="apps">Apps</li>
+    <li data-filter="games">Games</li>
+    <li data-filter="data">Data</li>
+    <li data-filter="backend">Backend</li>
+  </ul>
+
+  <div class="projects-grid" id="projectsGrid">
+
+    <article class="project-card" data-category="apps data backend">
+      <div class="project-thumb">
+        <!-- <img src="../images/project-1.jpg" alt="[Project Name]"> -->
+        <!-- <div class="placeholder">Project image</div> -->
+        <img src="../images/project1/BAMXweb.png" alt="project1">
+        <div class="project-overlay">
+          
+          <button type="button" class="js-open-modal" aria-label="View details" title="View details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="project-info">
+        <h3>Foodbank webpage</h3>
+        <p>Speed up the process of recollection of a food bank.</p>
+      </div>
+      
+      <div class="project-details" hidden>
+        <p>
+          Given that the food bank of Mexico (BAMX) in Morelos provides a service for beneficiaries, 
+          the employees at BAMX need to have control of the operations in BAMX, 
+          therefore we created a website with three types of users:
+        </p>
+        <p>- Admin: Manage users and visualize BAMX reports.</p>
+        <p>- Cashier: Register the attendance of the beneficiaries.</p>
+        <p>- Social Worker: Manage the of attendance beneficiaries, manage beneficiaries, manage petitions from beneficiary communities, and visualize reports.</p>
+    
+        <p>My role: I assisted with the creation of API endpoints, performing comprehensive API testing using Jest, and verifying the optimal performance of the web page through the utilization of a web driver.</p>
+        
+        <div class="tags">
+          <span>JavaScript</span>
+          <span>Selenium</span>
+          <span>Jest</span>
+          <span>Figma</span>
+          <span>git</span>
+          <span>Github</span>
+        </div>
+
+        <div class="project-gallery">
+          <video controls>
+              <source src="../images/project1/Login.mp4" type="video/mp4">
+              Your browser does not support the video element.
+          </video>
+          <img src="../images/project1/BAMXweb1.png" alt="web1">
+          <img src="../images/project1/BAMXweb2.png" alt="web2">
+          <img src="../images/project1/BAMXweb3.png" alt="web3">
+        </div>
+
+      </div>
+    </article>
+
+    <article class="project-card" data-category="apps data backend">
+      <div class="project-thumb">
+        
+        <img src="../images/project2/BAMXapp.png" alt="project2">
+        <div class="project-overlay">
+          
+          <button type="button" class="js-open-modal" aria-label="View details" title="View details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="project-info">
+        <h3>Mobile App Foodbank</h3>
+        <p>Mobile app to digitize and facilitate the recollection of donated products to a food bank.</p>
+      </div>
+      <div class="project-details" hidden>
+        <p>
+          Given that the food bank of Mexico (BAMX) in Morelos needs to keep track of the food they 
+          receive as well as go to certain places to pick up the food, my team created the BAMX app 
+          and BAMX food truck tracker website to have better control.
+        </p>
+
+        <p>
+          My Role: Involved with the development of the mobile app by assisting in both the design
+          and programming.
+          Specifically, I played a role inshaping the overall app layout, ensuring its functionality and 
+          user-friendliness. Additionally, I actively participated in writing the necessary code to 
+          bring the app to life, implementing various features and functionalities.
+          
+        </p>
+
+        <div class="tags">
+          <span>Kotlin</span>
+          <span>Android Studio</span>
+          <span>Figma</span>
+          <span>git</span>
+          <span>Github</span>
+        </div>
+
+        <div class="project-gallery">
+          <video controls>
+              <source src="../images/project2/BAMXapp.mp4" type="video/mp4">
+              Your browser does not support the video element.
+          </video>
+          <img src="../images/project2/BAMXapp1.png" alt="Webapp1">
+          <img src="../images/project2/BAMXapp2.png" alt="Webapp2">
+          <img src="../images/project2/BAMXapp3.png" alt="App1">
+          <img src="../images/project2/BAMXapp4.png" alt="App2">
+          <img src="../images/project2/BAMXapp5.png" alt="App3">
+        </div>
+
+      </div>
+    </article>
+
+    <article class="project-card" data-category="app data">
+      <div class="project-thumb">
+        <img src="../images/project3/AMK.png" alt="project3">
+
+        <div class="project-overlay">
+          
+          <button type="button" class="js-open-modal" aria-label="View details" title="View details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="project-info">
+        <h3>IoT for Plants</h3>
+        <p>Monitor a plants humidity, temperature, and sun exposure through a web page.</p>
+      </div>
+      <div class="project-details" hidden>
+        <p>
+          To keep track of a plant's humidity, temperature, and sun exposure, we 
+          use a nodemcu with three sensors in order to measure those charecteristics of the plant.
+          Through an arduino script the data collected was send to a webpage where you can monitor your plant.
+        </p>
+        <p>
+          My Role: Read the values registered in the sensors attached to the plant and 
+          send them to the web page for better visualization.
+        </p>
+        
+        
+        <div class="project-gallery">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/eQv8MddwFs8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <img src="../images/project3/amk1.png" alt="Web">
+          <img src="../images/project3/amk2.png" alt="Conexión">
+          <img src="../images/project3/amk3.png" alt="Instalación">
+          <img src="../images/project3/amk4.png" alt="Datos">
+          <img src="../images/project3/amk5.png" alt="Dashboard">
+        </div>
+
+        <div class="tags">
+          <span>Arduino</span>
+          <span>Esp32</span>
+          <span>Freeboard</span>
+          <span>Tinkercad</span>
+        </div>
+
+      </div>
+    </article>
+
+    <article class="project-card" data-category="games">
+      <div class="project-thumb">
+        <img src="../images/project4/KAMA_KART.png" alt="project4">
+
+        <div class="project-overlay">
+          
+          <button type="button" class="js-open-modal" aria-label="View details" title="View details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="project-info">
+        <h3>Decision Game</h3>
+        <p>Develop a video game where the user interacts with Al and the user plays a key role to winning.</p>
+      </div>
+      <div class="project-details" hidden>
+        <p>
+          In this racing game, players collaborate with Al to create a spaceship by consensus.
+          Each Al has a unique personality, specialty, and preferences for certain objectives.
+          The player mediates between the Als to keep them content and ensure a finished spaceship.
+          Successful mediation showcases the ship's performance on-screen.
+        </p>
+        <p>
+          My Role: I played a role in the game design by implementing the 
+          menu user interface (Ul) and selecting and integrating the soundtrack 
+          and sound effects for the game.
+        </p>
+
+        <div class="tags">
+          <span>C#</span>
+          <span>Unity</span>
+        </div>
+
+        <div class="project-gallery">
+          <video controls>
+              <source src="../images/project4/KART.mp4" type="video/mp4">
+              Your browser does not support the video element.
+          </video>
+          <img src="../images/project4/KART1.png" alt="Game1">
+          <img src="../images/project4/KART2.png" alt="Game2">
+          <img src="../images/project4/KART3.png" alt="Game3">
+          <img src="../images/project4/KART4.png" alt="Game4">  
+          <img src="../images/project4/KART5.png" alt="Game5">
+          <img src="../images/project4/KART6.png" alt="Game6">
+          <img src="../images/project4/KART7.png" alt="Game7">
+        </div>
+
+      </div>
+    </article>
+
+    <article class="project-card" data-category="games data">
+      <div class="project-thumb">
+        <img src="../images/project5/minsait.png" alt="project5">
+
+        <div class="project-overlay">
+          
+          <button type="button" class="js-open-modal" aria-label="View details" title="View details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="project-info">
+        <h3>Soft Skills Evaluator Game</h3>
+        <p>
+          Develop a video game that evaluates three soft skills (working under pressure,
+          problem-solving, and ethics, trust & values) of an eligible candidate for a job in MINSAIT.
+        </p>
+      </div>
+
+      <div class="project-details" hidden>
+        <p>
+          To further evaluate a candidate, MINSAIT applies a soft skill test to their candidates, 
+          sometimes the candidate is familiar with the questions being asked so they choose 
+          the expected answer. One of the possible solutions is to evaluate the candidate's 
+          soft skills through a video game where they don't have explicit questions but rather 
+          actions to evaluate their soft skills.
+        </p>
+
+        <p>
+          My Role: I assisted with the game design, programming of game functions, 
+          and score design for the three soft skills.
+        </p>
+        <div class="tags">
+          <span>C#</span>
+          <Span>Unity</Span>
+        </div>
+        
+        <div class="project-gallery">
+          <video controls>
+              <source src="../images/project5/KING.mp4" type="video/mp4">
+              Your browser does not support the video element.
+          </video>
+          <img src="../images/project5/KING1.png" alt="GameUnity1">
+          <img src="../images/project5/KING2.png" alt="GameUnity2">
+          <img src="../images/project5/KING3.png" alt="GameUnity3">
+          <img src="../images/project5/KING4.png" alt="GameUnity4">
+        </div>
+
+
+      </div>
+    </article>
+
+    
+
+  </div>
+
+  <div class="page-num">4</div>
+</section>
+
+
+<div class="project-modal" id="projectModal">
+  <div class="project-modal-inner">
+    <button type="button" class="project-modal-close" id="projectModalClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="project-modal-img">
+      <div class="placeholder" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--ink-soft);">Project image</div>
+    </div>
+    <div class="project-modal-body">
+      <h3 id="projectModalTitle"></h3>
+      <div class="tags" id="projectModalTags"></div>
+      <div id="projectModalText"></div>
+      <div id="projectModalGallery" class="project-modal-gallery"></div>
+    </div>
+  </div>
+</div>
+
+
+
+<footer id="footer">
+  © 2024 Alexa Basurto. All rights reserved.
+  <a href="https://github.com/AlexaBF" target="_blank" rel="noopener noreferrer">
+    <i class="fa fa-github" style="font-size:20px;"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/alexa-bf/" target="_blank" rel="noopener noreferrer">
+    <i class="fa fa-linkedin" style="font-size:20px;"></i>
+  </a>
+</footer>
+
+<script>
+  //punto de navegación
+  const sections = document.querySelectorAll('section[id]');
+  const dots = document.querySelectorAll('.dotnav a');
+  const map = {};
+  dots.forEach(d => map[d.getAttribute('href').slice(1)] = d);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        dots.forEach(d => d.classList.remove('active'));
+        const dot = map[entry.target.id];
+        if (dot) dot.classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // ---------- Filtro de proyectos ----------
+  const filterButtons = document.querySelectorAll('#projectFilters li');
+  const projectCards = document.querySelectorAll('#projectsGrid .project-card');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('filter-active'));
+      btn.classList.add('filter-active');
+      const filter = btn.getAttribute('data-filter');
+
+      projectCards.forEach(card => {
+        const cats = (card.getAttribute('data-category') || '').split(' ');
+        const show = filter === 'all' || cats.includes(filter);
+        card.classList.toggle('is-hidden', !show);
+      });
+    });
+  });
+
+  // ---------- Modal de detalle del proyecto ----------
+  const modal = document.getElementById('projectModal');
+  const modalClose = document.getElementById('projectModalClose');
+  const modalTitle = document.getElementById('projectModalTitle');
+  const modalTags = document.getElementById('projectModalTags');
+  const modalText = document.getElementById('projectModalText');
+  const modalImg = modal.querySelector('.project-modal-img');
+  const modalGallery = document.getElementById('projectModalGallery');
+
+  function openProjectModal(card) {
+
+    const title = card.querySelector('.project-info h3').textContent;
+    const details = card.querySelector('.project-details');
+    const thumbImg = card.querySelector('.project-thumb img');
+
+    modalTitle.textContent = title;
+
+    // Tags
+    const tags = details ? details.querySelector('.tags') : null;
+
+    modalTags.innerHTML = tags
+      ? tags.innerHTML
+      : '';
+
+    // Descripción
+    modalText.innerHTML = details
+      ? Array.from(details.querySelectorAll('p'))
+          .map(p => `<p>${p.textContent}</p>`)
+          .join('')
+      : '';
+
+    // Imagen principal
+    modalImg.innerHTML = thumbImg
+      ? `<img src="${thumbImg.src}" alt="${title}">`
+      : `<div class="placeholder"
+          style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--ink-soft);">
+          Project image
+        </div>`;
+
+    // Galería
+    modalGallery.innerHTML = '';
+
+    const gallery = details
+      ? details.querySelector('.project-gallery')
+      : null;
+
+    if (gallery) {
+
+      gallery.querySelectorAll('img, video, iframe').forEach(item => {
+
+        if (item.tagName === 'IMG') {
+
+          const img = document.createElement('img');
+
+          img.src = item.src;
+          img.alt = item.alt || title;
+
+          modalGallery.appendChild(img);
+
+        }
+
+        else if (item.tagName === 'VIDEO') {
+          const video = document.createElement('video');
+
+          video.controls = true;
+          video.preload = 'metadata';
+          video.playsInline = true;
+          video.className = 'modal-video';
+
+          const source = item.querySelector('source');
+
+          if (source) {
+            const newSource = document.createElement('source');
+            newSource.src = source.src;
+            newSource.type = source.type || 'video/mp4';
+
+            video.appendChild(newSource);
+          } else {
+            video.src = item.src;
+          }
+
+          modalGallery.appendChild(video);
+
+        }
+
+        else if (item.tagName === 'IFRAME') {
+
+          const iframe = document.createElement('iframe');
+
+          iframe.src = item.src;
+          iframe.title = item.title || title;
+          iframe.allowFullscreen = true;
+
+          modalGallery.appendChild(iframe);
+
+        }
+
+      });
+    }
+
+    modal.classList.add('is-open');
+
+    document.body.style.overflow = 'hidden';
+  }
+
+
+  function closeProjectModal(){
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  projectCards.forEach(card => {
+    card.querySelectorAll('.js-open-modal').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openProjectModal(card);
+      });
+    });
+  });
+
+  modalClose.addEventListener('click', closeProjectModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeProjectModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeProjectModal();
+  });
+</script>
+
+</body>
+</html>
