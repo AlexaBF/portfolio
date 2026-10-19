@@ -644,18 +644,86 @@
 
   <ul class="projects-filters" id="projectFilters">
     <li data-filter="all" class="filter-active">Todos los Proyectos</li>
+    <li data-filter="web">Web</li>
     <li data-filter="apps">Apps</li>
     <li data-filter="games">Juegos</li>
     <li data-filter="data">Data</li>
-    <li data-filter="backend">Backend</li>
+    <li data-filter="iot">IoT</li>
   </ul>
 
   <div class="projects-grid" id="projectsGrid">
 
-    <article class="project-card" data-category="apps data backend">
+    <article class="project-card" data-category="apps data">
       <div class="project-thumb">
-        <!-- <img src="../images/project-1.jpg" alt="[Project Name]"> -->
-        <!-- <div class="placeholder">Project image</div> -->
+        <img src="images/project6/streamlit.png" alt="project6">
+
+        <div class="project-overlay">
+          
+          <button type="button" class="js-open-modal" aria-label="View details" title="View details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="project-info">
+        <h3>Panel interactivo de Copa Mundial de la FIFA 2026</h3>
+        <p>
+          Un panel interactivo desarrollado con Streamlit para explorar información 
+          sobre partidos, selecciones, jugadores, porteros y sedes de la Copa Mundial de la FIFA.
+        </p>
+      </div>
+
+      <div class="project-details" hidden>
+        <p>
+          El proyecto está orientado a la visualización y análisis de datos deportivos,
+           utilizando Streamlit como motor principal para el desarrollo del dashboard y
+            Plotly Express para la creación de visualizaciones interactivas.
+            El procesamiento, limpieza y filtrado de los datos se realizó con Python, NumPy y Pandas, 
+            utilizando datos recopilados de Kaggle.
+        </p>
+        <p>
+          Secciones del panel:<br>
+          - Overview: Estadísticas generales del torneo, resultados del podio y visualizaciones generales.<br>
+          - Matches: Estadísticas de los partidos, gráficos comparativos y análisis de las diferencias entre equipos en encuentros específicos.<br>
+          - Teams: Exploración de estadísticas y rendimiento de las selecciones.<br>
+          - Players: Análisis de estadísticas individuales de los jugadores, incluyendo goles, asistencias, edad y tiempo de juego.<br>
+          - Goalkeepers: Estadísticas generales e individuales de los porteros, acompañadas de métricas y visualizaciones.<br>
+          - Venue: Análisis de registros de asistencia, identificación de las sedes más destacadas y visualización de su ubicación mediante un mapa interactivo.
+        </p>
+        <p>
+          <a href="https://github.com/AlexaBF/dashboard_worldcup_2026" target="_blank">Github Repository</a><br>
+          <a href="https://dashboardworldcup2026.streamlit.app/" target="_blank">Streamlit Live Demo</a>
+        </p>
+        
+        <p>
+          Mi rol: Desarrollé de manera independiente la aplicación completa, 
+          desde el preprocesamiento y análisis de datos hasta el desarrollo 
+          del dashboard interactivo, el diseño de visualizaciones y el 
+          despliegue de la aplicación utilizando Streamlit y Plotly Express.
+        </p>
+        <div class="tags">
+          <span>Python</span>
+          <span>Streamlit</span>
+          <span>Pandas</span>
+          <span>NumPy</span>
+          <span>Plotly</span>
+          <span>Kaggle</span>
+        </div>
+        <div class="project-gallery">
+          <video controls>
+              <source src="images/project6/dashboard.mp4" type="video/mp4">
+              Your browser does not support the video element.
+          </video>
+          <img src="images/project6/dashboard1.png" alt="dashboard1">
+          <img src="images/project6/dashboard2.png" alt="dashboard2">
+          <img src="images/project6/dashboard3.png" alt="dashboard3">
+          <img src="images/project6/dashboard4.png" alt="dashboard4">
+        </div>
+
+      </div>
+    </article>
+
+    <article class="project-card" data-category="web">
+      <div class="project-thumb">
         <img src="images/project1/BAMXweb.png" alt="project1">
         <div class="project-overlay">
           
@@ -701,7 +769,7 @@
       </div>
     </article>
 
-    <article class="project-card" data-category="apps data backend">
+    <article class="project-card" data-category="apps">
       <div class="project-thumb">
         
         <img src="images/project2/BAMXapp.png" alt="project2">
@@ -754,7 +822,7 @@
       </div>
     </article>
 
-    <article class="project-card" data-category="app data">
+    <article class="project-card" data-category="web iot">
       <div class="project-thumb">
         <img src="images/project3/AMK.png" alt="project3">
 
@@ -884,7 +952,7 @@
         </p>
         <div class="tags">
           <span>C#</span>
-          <Span>Unity</Span>
+          <span>Unity</span>
         </div>
         <div class="project-gallery">
           <video controls>
@@ -899,6 +967,7 @@
 
       </div>
     </article>
+
 
     
 
@@ -1000,10 +1069,10 @@
 
     // Descripción
     modalText.innerHTML = details
-      ? Array.from(details.querySelectorAll('p'))
-          .map(p => `<p>${p.textContent}</p>`)
-          .join('')
-      : '';
+    ? Array.from(details.querySelectorAll('p'))
+        .map(p => p.outerHTML)
+        .join('')
+    : '';
 
     // Imagen principal
     modalImg.innerHTML = thumbImg
